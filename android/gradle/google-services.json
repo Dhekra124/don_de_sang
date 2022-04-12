@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "532988614394",
+    "project_id": "projet1-7d527",
+    "storage_bucket": "projet1-7d527.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:532988614394:android:b066bbf24ce10b73571b43",
+        "android_client_info": {
+          "package_name": "com.ma_dhekra.don_de_sang"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "532988614394-dn0v50jc797pi9l6eaajtrg65oq0ba8p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtJUGtYTHP6FQX_xQBhNQ1YVm_G_vEsgc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "532988614394-dn0v50jc797pi9l6eaajtrg65oq0ba8p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
