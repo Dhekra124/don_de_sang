@@ -76,21 +76,21 @@ class _inscriptionState extends State<SignUpDonneur> {
                         ),
 
                         buildTextFormField(
-                            CinController, "Cin", TextInputType.text),
+                            CinController, "Cin", TextInputType.text, false),
 
                         buildTextFormField(
-                            NomControlelr, "Nom", TextInputType.text),
-                        buildTextFormField(
-                            PrenomController, "Prenom", TextInputType.text),
+                            NomControlelr, "Nom", TextInputType.text, false),
+                        buildTextFormField(PrenomController, "Prenom",
+                            TextInputType.text, false),
                         buildTextFormField(EmailController, "Email",
-                            TextInputType.emailAddress),
+                            TextInputType.emailAddress, false),
                         buildTextFormField(PasswordController, "Mot de passe",
-                            TextInputType.text),
+                            TextInputType.text, true),
 
                         buildTextFormField(TelController, "Numéro de Telephone",
-                            TextInputType.phone),
-                        buildTextFormField(
-                            PoidsController, "Poids", TextInputType.number),
+                            TextInputType.phone, false),
+                        buildTextFormField(PoidsController, "Poids",
+                            TextInputType.number, false),
                         ElevatedButton(
                             onPressed: () {
                               showDatePicker(
@@ -109,12 +109,12 @@ class _inscriptionState extends State<SignUpDonneur> {
                                 ? Text(
                                     "Date de naissance  : ${DateFormat('yyyy-MM-dd').format(DateNaiss)}")
                                 : Text("Date de naissance ")),
-                        buildTextFormField(
-                            VilleController, "Ville", TextInputType.text),
-                        buildTextFormField(
-                            AdresseController, "Adresse", TextInputType.text),
+                        buildTextFormField(VilleController, "Ville",
+                            TextInputType.text, false),
+                        buildTextFormField(AdresseController, "Adresse",
+                            TextInputType.text, false),
                         buildTextFormField(LieuDeNaissanceController,
-                            "Lieu de Naiisance", TextInputType.text),
+                            "Lieu de Naiisance", TextInputType.text, false),
 
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -508,10 +508,11 @@ class _inscriptionState extends State<SignUpDonneur> {
   }
 
   Padding buildTextFormField(TextEditingController Controller, String label,
-      TextInputType keyboardType) {
+      TextInputType keyboardType, bool obscuretext) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: TextFormField(
+        obscureText: obscuretext,
         keyboardType: keyboardType,
         validator: (value) {
           if (value!.isEmpty) {

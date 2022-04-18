@@ -99,10 +99,10 @@ class _HomePageDemandeurState extends State<HomePageAgentLabo> {
                 child: Container(
                   width: double.infinity,
                   child: Text(
-                    "Bonjour ${user['Nom']} ",
+                    "Bonjour  ${user['Prenom']} ${user['Nom']} ",
                     style: TextStyle(
                         color: Colors.blueAccent,
-                        fontSize: Constants.screenHeight * 0.05),
+                        fontSize: Constants.screenHeight * 0.03),
                   ),
                 ),
               ),

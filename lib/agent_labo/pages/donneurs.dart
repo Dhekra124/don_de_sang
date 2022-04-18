@@ -37,55 +37,73 @@ class _StcockState extends State<Donneurs> {
               builder: (context, snapshotUserData) {
                 if (snapshotUserData.hasData) {
                   if (snapshotUserData.data!.size != 0) {
-                    return ListView.builder(
-                        itemCount: snapshotUserData.data!.size,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                                height: Constants.screenHeight * 0.13,
-                                decoration: BoxDecoration(
-                                    color: Colors.green.withOpacity(0.2),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: ListTile(
-                                  onTap: () {
-                                    Get.to(DonneurDetails(
-                                      idUser: snapshotUserData.data!.docs[index]
-                                          .get("idUser"),
-                                    ));
-                                  },
-                                  title: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Row(
-                                      children: [
-                                        CircleAvatar(
-                                          backgroundImage:
-                                              AssetImage('images/user.png'),
-                                          backgroundColor: Colors.transparent,
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: Constants.screenHeight * 0.03),
+                          child: Text(
+                              "Nombre totale : ${snapshotUserData.data!.size}"),
+                        ),
+                        Expanded(
+                          child: ListView.builder(
+                              itemCount: snapshotUserData.data!.size,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                      height: Constants.screenHeight * 0.13,
+                                      decoration: BoxDecoration(
+                                          color: Colors.green.withOpacity(0.2),
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      child: ListTile(
+                                        onTap: () {
+                                          Get.to(DonneurDetails(
+                                            idUser: snapshotUserData
+                                                .data!.docs[index]
+                                                .get("idUser"),
+                                          ));
+                                        },
+                                        title: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            children: [
+                                              CircleAvatar(
+                                                backgroundImage: AssetImage(
+                                                    'images/user.png'),
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                              ),
+                                              SizedBox(
+                                                width: Constants.screenWidth *
+                                                    0.07,
+                                              ),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                      "Nom: ${snapshotUserData.data!.docs[index].get('Nom')}"),
+                                                  Text(
+                                                      "Prenom: ${snapshotUserData.data!.docs[index].get('Prenom')}"),
+                                                  Text(
+                                                      "CIN: ${snapshotUserData.data!.docs[index].get('CIN')}"),
+                                                  Text(
+                                                      "Ville: ${snapshotUserData.data!.docs[index].get('Ville')}"),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                        SizedBox(
-                                          width: Constants.screenWidth * 0.07,
-                                        ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                                "Nom: ${snapshotUserData.data!.docs[index].get('Nom')}"),
-                                            Text(
-                                                "Prenom: ${snapshotUserData.data!.docs[index].get('Prenom')}"),
-                                            Text(
-                                                "CIN: ${snapshotUserData.data!.docs[index].get('CIN')}"),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )),
-                          );
-                        });
+                                      )),
+                                );
+                              }),
+                        ),
+                      ],
+                    );
                   } else {
                     return Center(child: Text("Pas de donneurs encore"));
                   }

@@ -13,6 +13,7 @@ var demandeCollection = FirebaseFirestore.instance
 bottomSheetDemandeur(BuildContext context) {
   final _formKey = GlobalKey<FormState>();
   TextEditingController QuantityController = TextEditingController();
+  TextEditingController CauseController = TextEditingController();
 
   bool isLoading = false;
   bool isDone = false;
@@ -40,36 +41,67 @@ bottomSheetDemandeur(BuildContext context) {
                     ? doneAddPlanning(context, size)
                     : Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text("Ajouter un  de demande   "),
                           Form(
                             key: _formKey,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: TextFormField(
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "champ obligatoire";
-                                  }
-                                },
-                                controller: QuantityController,
-                                keyboardType: TextInputType.number,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return "champ obligatoire";
+                                      }
+                                    },
+                                    controller: QuantityController,
+                                    keyboardType: TextInputType.number,
 
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    borderSide: BorderSide.none,
-                                  ), // OutlineInputBorder
-                                  filled: true,
-                                  fillColor: Color(0xFFe7edeb),
-                                  hintText: "Quantité en Litre",
-                                  prefixIcon: Icon(
-                                    Icons.format_list_numbered_sharp,
-                                    color: Colors.grey[600],
-                                  ), //Icon
-                                ), // InputDecoration
-                              ),
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        borderSide: BorderSide.none,
+                                      ), // OutlineInputBorder
+                                      filled: true,
+                                      fillColor: Color(0xFFe7edeb),
+                                      hintText: "Quantité en Litre",
+                                      prefixIcon: Icon(
+                                        Icons.format_list_numbered_sharp,
+                                        color: Colors.grey[600],
+                                      ), //Icon
+                                    ), // InputDecoration
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: TextFormField(
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return "champ obligatoire";
+                                      }
+                                    },
+                                    controller: CauseController,
+                                    keyboardType: TextInputType.text,
+
+                                    decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        borderSide: BorderSide.none,
+                                      ), // OutlineInputBorder
+                                      filled: true,
+                                      fillColor: Color(0xFFe7edeb),
+                                      hintText: "Cause de demande ",
+                                      prefixIcon: Icon(
+                                        Icons.format_list_numbered_sharp,
+                                        color: Colors.grey[600],
+                                      ), //Icon
+                                    ), // InputDecoration
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           isLoading
@@ -119,7 +151,8 @@ bottomSheetDemandeur(BuildContext context) {
                                               'quantity': int.parse(
                                                   QuantityController.text),
                                               'creation_date': DateTime.now(),
-                                              'ville': user['Ville']
+                                              'ville': user['Ville'],
+                                              'Cause': CauseController.text,
                                             });
                                             setState(() {
                                               isLoading = false;

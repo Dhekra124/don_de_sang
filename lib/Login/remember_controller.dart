@@ -14,6 +14,8 @@ class RememberController extends GetxController {
       'idUser': user['idUser'],
       'CIN': user['CIN'],
       'Ville': user['Ville'],
+      'Genre': user['Genre'],
+      'nom_labo': user['nom_labo'],
     });
   }
 
@@ -29,6 +31,7 @@ class RememberController extends GetxController {
       'idUser': user['idUser'],
       'CIN': user['CIN'],
       'Ville': user['Ville'],
+      'Genre': user['Genre'],
     });
   }
 
@@ -44,6 +47,7 @@ class RememberController extends GetxController {
       'idUser': user['idUser'],
       'CIN': user['CIN'],
       'Ville': user['Ville'],
+      'Genre': user['Genre'],
     });
   }
 

@@ -84,6 +84,8 @@ class _DonneurDetailsState extends State<DemandeurDetails> {
                                               Text("Etat: ${state}"),
                                               Text(
                                                   "Date de demande : ${DateFormat('yyyy-MM-dd HH:mm:ss').format(snapshotUserData.data!.docs[index].get("creation_date").toDate())}"),
+                                              Text(
+                                                  "Cause : ${snapshotUserData.data!.docs[index].get("Cause")}"),
                                               Spacer(),
                                               ElevatedButton(
                                                   onPressed: label != "Terminé"

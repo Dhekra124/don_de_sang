@@ -22,13 +22,13 @@ Drawer buildDrawer(BuildContext context) {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            CircleAvatar(
+              radius: Constants.screenHeight * 0.05,
+              backgroundColor: Colors.transparent,
+              backgroundImage: AssetImage("images/user.png"),
+            ),
             Row(
               children: [
-                CircleAvatar(
-                  radius: Constants.screenHeight * 0.07,
-                  backgroundColor: Colors.transparent,
-                  backgroundImage: AssetImage("images/user.png"),
-                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -47,9 +47,33 @@ Drawer buildDrawer(BuildContext context) {
                         style: TextStyle(color: Colors.white),
                       ),
                       Text(
-                        "Type de sang: ${user['TypeSang']}",
+                        "Email: ${user['Email']}",
                         style: TextStyle(color: Colors.white),
                       ),
+                      Text(
+                        "Adresse: ${user['Ville']} ",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      if (user['Genre'] == "Agent") ...[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Nom de laboratoire: ",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Text(
+                              "${user['nom_labo']}",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ] else ...[
+                        Text(
+                          "Type de sang: ${user['TypeSang']}",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
                     ],
                   ),
                 )

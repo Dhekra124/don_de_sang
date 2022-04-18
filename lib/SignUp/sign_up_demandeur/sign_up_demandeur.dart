@@ -76,22 +76,22 @@ class _inscriptionState extends State<SignUpDemandeur> {
                         ),
 
                         buildTextFormField(
-                            CinController, "Cin", TextInputType.text),
+                            CinController, "Cin", TextInputType.text, false),
 
                         buildTextFormField(
-                            NomControlelr, "Nom", TextInputType.text),
-                        buildTextFormField(
-                            PrenomController, "Prenom", TextInputType.text),
+                            NomControlelr, "Nom", TextInputType.text, false),
+                        buildTextFormField(PrenomController, "Prenom",
+                            TextInputType.text, false),
                         buildTextFormField(EmailController, "Email",
-                            TextInputType.emailAddress),
+                            TextInputType.emailAddress, false),
 
                         buildTextFormField(PasswordController, "Mot de passe",
-                            TextInputType.text),
+                            TextInputType.text, true),
 
                         buildTextFormField(TelController, "Numéro de Telephone",
-                            TextInputType.phone),
-                        buildTextFormField(
-                            PoidsController, "Poids", TextInputType.number),
+                            TextInputType.phone, false),
+                        buildTextFormField(PoidsController, "Poids",
+                            TextInputType.number, false),
                         ElevatedButton(
                             onPressed: () {
                               showDatePicker(
@@ -110,12 +110,12 @@ class _inscriptionState extends State<SignUpDemandeur> {
                                 ? Text(
                                     "Date de naissance  : ${DateFormat('yyyy-MM-dd').format(DateNaiss)}")
                                 : Text("Date de naissance ")),
-                        buildTextFormField(
-                            VilleController, "Ville", TextInputType.text),
-                        buildTextFormField(
-                            AdresseController, "Adresse", TextInputType.text),
+                        buildTextFormField(VilleController, "Ville",
+                            TextInputType.text, false),
+                        buildTextFormField(AdresseController, "Adresse",
+                            TextInputType.text, false),
                         buildTextFormField(LieuDeNaissanceController,
-                            "Lieu de Naiisance", TextInputType.text),
+                            "Lieu de Naiisance", TextInputType.text, false),
 
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -444,6 +444,18 @@ class _inscriptionState extends State<SignUpDemandeur> {
                                               ToastGravity.BOTTOM, // location
                                           timeInSecForIosWeb: 1 // duration
                                           );
+                                    } else if (PasswordController.text.length <
+                                        8) {
+                                      Fluttertoast.showToast(
+                                          backgroundColor: Colors.grey,
+                                          msg:
+                                              "mot de pass doit étre plus de 8 elements", // message
+                                          toastLength:
+                                              Toast.LENGTH_SHORT, // length
+                                          gravity:
+                                              ToastGravity.BOTTOM, // location
+                                          timeInSecForIosWeb: 1 // duration
+                                          );
                                     } else {
                                       setState(() {
                                         isLoading = true;
@@ -509,10 +521,11 @@ class _inscriptionState extends State<SignUpDemandeur> {
   }
 
   Padding buildTextFormField(TextEditingController Controller, String label,
-      TextInputType keyboardType) {
+      TextInputType keyboardType, bool obscuretext) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: TextFormField(
+        obscureText: obscuretext,
         keyboardType: keyboardType,
         validator: (value) {
           if (value!.isEmpty) {
