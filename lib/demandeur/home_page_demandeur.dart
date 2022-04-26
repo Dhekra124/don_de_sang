@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:don_de_sang/Constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
@@ -20,7 +21,7 @@ class HomePageDemandeur extends StatefulWidget {
 
 class _HomePageDemandeurState extends State<HomePageDemandeur> {
   var user = GetStorage().read("user");
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -95,31 +96,60 @@ class _HomePageDemandeurState extends State<HomePageDemandeur> {
                               }
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                    height: Constants.screenHeight * 0.13,
-                                    decoration: BoxDecoration(
-                                        color: stateColor,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: ListTile(
-                                      title: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                                "Etat de demande de don : ${state}"),
-                                            Text(
-                                                "Quantité de sang : ${snapshotUserData.data!.docs[index].get("quantity")}"),
-                                            Text(
-                                                "Date de demande : ${DateFormat('yyyy-MM-dd HH:mm:ss').format(snapshotUserData.data!.docs[index].get("creation_date").toDate())}"),
-                                          ],
-                                        ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: Slidable(
+                                    actionPane: SlidableDrawerActionPane(),
+                                    secondaryActions: [
+                                      IconSlideAction(
+                                        onTap: () {
+                                          Slidable.of(context)?.renderingMode ==
+                                                  SlidableRenderingMode.none
+                                              ? Slidable.of(context)?.open()
+                                              : Slidable.of(context)?.close();
+                                        },
+                                        caption: "Annuler",
+                                        icon: Icons.close,
+                                        color: Colors.red,
                                       ),
-                                    )),
+                                      IconSlideAction(
+                                        caption: "Supprimer",
+                                        icon: Icons.delete,
+                                        color: Colors.green,
+                                        onTap: () {
+                                          snapshotUserData
+                                              .data!.docs[index].reference
+                                              .delete();
+                                        },
+                                      )
+                                    ],
+                                    child: Container(
+                                        height: Constants.screenHeight * 0.13,
+                                        decoration: BoxDecoration(
+                                            color: stateColor,
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: ListTile(
+                                          title: Padding(
+                                            padding: const EdgeInsets.all(8.0),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                    "Etat de demande de don : ${state}"),
+                                                Text(
+                                                    "Quantité de sang : ${snapshotUserData.data!.docs[index].get("quantity")}"),
+                                                Text(
+                                                    "Date de demande : ${DateFormat('yyyy-MM-dd HH:mm:ss').format(snapshotUserData.data!.docs[index].get("creation_date").toDate())}"),
+                                              ],
+                                            ),
+                                          ),
+                                        )),
+                                  ),
+                                ),
                               );
                             });
                       } else {

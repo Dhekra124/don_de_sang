@@ -4,6 +4,7 @@ import 'package:don_de_sang/Constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:lottie/lottie.dart';
 
 import '../Login/login_screen.dart';
 import '../agent_labo/home_agent_labo.dart';
@@ -53,44 +54,34 @@ class _TestState extends State<SplashScreen> {
         body: Container(
           width: double.infinity,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Container(
+                    height: size.height * 0.1,
+                    child: Image.asset("images/blood-bag.png")),
+              ),
               Container(
                   height: Constants.screenHeight * 0.3,
-                  child: Image.asset("images/image.jpg")),
-              Container(
-                  height: Constants.screenHeight * 0.3,
-                  child: Image.asset("images/drapo.png")),
-              new Text(
-                "SANG DONNE ",
-                style: TextStyle(
-                  color: Colors.green,
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.w800,
+                  child: Image.asset("images/tunisie.png")),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text(
+                  "Don de sang",
+                  style: TextStyle(
+                      fontSize: Constants.screenHeight * 0.03,
+                      color: Colors.blueAccent),
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: size.height * 0.3,
               ),
-              new Text(
-                "= ",
-                style: TextStyle(
-                  color: Colors.green,
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              new Text(
-                "VIE SAUVÉE ",
-                style: TextStyle(
-                  color: Colors.green,
-                  fontSize: 30.0,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
+              Container(
+                  child: Lottie.asset(
+                'images/loading.json',
+                height: size.height * 0.1,
+              )),
             ],
           ),
         ),
